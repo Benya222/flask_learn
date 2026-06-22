@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Tasks</h1>
+    <ol>
+      {% for item in our_events %}
+      <li>
+        {% if item["time"] < "12:00" %}
+        <h2>{{ item["title"]|capitalize }}(ранкова подія)</h2>
+        {% else %}
+        <h2>{{ item["title"]|capitalize }}</h2>
+        {% endif %}
+        <p>Час {{ item["time"] }}</p>
+        <ul>
+          {% for u in item["participants"] %}
+          <li>{{ u }}</li>
+          {% endfor %}
+        </ul>
+      </ul>
+      {% endfor %}
+    </ol>
+  </body>
+</html>
