@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cafe</title>
+  </head>
+  <body>
+    <h1>КаваЗупинка</h1>
+    <p>График работі: з 11:00 до 22:00</p>
+
+    {% if is_open %}
+    <p>відкрито</p>
+    {% else %}
+    <p>зачинено</p>
+    {% endif %}
+  </body>
+</html>
