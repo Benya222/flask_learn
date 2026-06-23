@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 
 @app.route('/')
+@app.route('/index')
 def index():
     now = datetime.datetime.now().time()
     start_time = datetime.time(11, 0)
@@ -22,7 +23,11 @@ def menu():
         "Чізкейк": 120,
         "Панкейки": 95
     }
-    return render_template('menu.html', base_menu= menu)
+    days = ["Monday", "Tuesday", "Wednsday", "Thursday", "Friday", "Saturday", "Sunday"]
+    now = datetime.datetime.now()
+    current_day = days[now.weekday()]
+    friday = "Friday"
+    return render_template('menu.html', base_menu= menu, the_day= current_day)
 
 
 app.run(debug= True)

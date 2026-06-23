@@ -6,11 +6,23 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Найвкусніше меню:</h1>
+    <h1>Найсмачніше меню:</h1>
     <ol>
       {% for key, value in base_menu.items() %}
-      <li>{{ key }}: {{ value }}</li>
+      {% if the_day == "Friday" %}
+      <li>
+        <p>
+          {{ key }}:
+          <span style="text-decoration: line-through">{{ value }}</span> {{value * 0.9}} <span style="color: forestgreen">-10%</span>
+        </p>
+      </li>
+      {% else %}
+      <li>
+        <p>{{ key }}: {{ value }}</p>
+      </li>
+      {% endif %}
       {% endfor %}
     </ol>
+    <a href="./index">Перейти на головну</a>
   </body>
 </html>
