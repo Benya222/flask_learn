@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="POST">
+      <label for="age_day">День</label>
+      <input type="number" name="age_day" id="age_day" />
+
+      <label for="age_mounth">Месяц</label>
+      <input type="number" name="age_mounth" id="age_mounth" />
+
+      <label for="age_year">Рік</label>
+      <input type="number" name="age_year" id="age_year" />
+
+      <button type="submit">Відправити</button>
+    </form>
+    {% if age %}
+    <p>Ваш рік: {{ age }}</p>
+    <p>Ваши дні: {{ age_days }}</p>
+    {% endif %}
+  </body>
+</html>
