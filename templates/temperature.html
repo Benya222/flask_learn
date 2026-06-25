@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Конвертер температури</title>
+  </head>
+  <body>
+    <h1>Конвертер температури</h1>
+    <form method="post">
+      <label for="temp_converter">Температура (°C):</label>
+      <input type="number" name="temp_converter" id="temp_converter" />
+      <button type="submit">Перевести</button>
+    </form>
+    <p>Температура: {{ temperature }} °C</p>
+    <p>У Фаренгейтах: {{ fahrenheit }} °F</p>
+  </body>
+</html>
