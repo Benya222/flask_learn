@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
+    />
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <title>Giftlist</title>
+  </head>
+  <body>
+    <h1 class="title">Giftlist</h1>
+    <form method="post">
+      <label for="add_gift">Додати подарунок</label>
+      <input type="text" name="add_gift" id="add_gift" required />
+      <button type="submit">Додати</button>
+    </form>
+    <form method="get">
+      <label for="search_gift">Знайти подарунок</label>
+      <input type="text" name="search_gift" id="search_gift" />
+      <button type="submit">Знайти</button>
+    </form>
+    {% if to_get == 'OK'%}
+    <p>Такий подарунок вже є у списку</p>
+    {% elif to_get == 'NOT' %}
+    <p>Такого подарунка ще немає у списку</p>
+    {% endif %}
+    <ul>
+      {% for item in gift_list %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
