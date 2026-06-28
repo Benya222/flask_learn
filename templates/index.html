@@ -11,10 +11,15 @@
     <title>Giftlist</title>
   </head>
   <body>
+    {% with messages = get_flashed_messages() %}
+    {% for msg in messages %}
+    <p>{{ msg }}</p> 
+    {% endfor %}
+    {% endwith %}
     <h1 class="title">Giftlist</h1>
     <form method="post">
       <label for="add_gift">Додати подарунок</label>
-      <input type="text" name="add_gift" id="add_gift" required />
+      <input type="text" name="add_gift" id="add_gift" />
       <button type="submit">Додати</button>
     </form>
     <form method="get">
@@ -22,9 +27,11 @@
       <input type="text" name="search_gift" id="search_gift" />
       <button type="submit">Знайти</button>
     </form>
-    {% if to_get == 'OK'%}
+    {% if to_get == '*' %}
+    <p>Дізнайтесь який подарунок вже є у списку</p>
+    {% elif to_get == True %}
     <p>Такий подарунок вже є у списку</p>
-    {% elif to_get == 'NOT' %}
+    {% else %}
     <p>Такого подарунка ще немає у списку</p>
     {% endif %}
     <ul>
