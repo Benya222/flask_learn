@@ -3,20 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/3.0.1/modern-normalize.min.css"
-    />
-    <link rel="stylesheet" href="../static/css/style.css" />
     <title>Giftlist</title>
   </head>
   <body>
+    <h1 class="title">Giftlist</h1>
     {% with messages = get_flashed_messages() %}
     {% for msg in messages %}
     <p>{{ msg }}</p> 
     {% endfor %}
     {% endwith %}
-    <h1 class="title">Giftlist</h1>
     <form method="post">
       <label for="add_gift">Додати подарунок</label>
       <input type="text" name="add_gift" id="add_gift" />

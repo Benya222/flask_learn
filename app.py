@@ -22,7 +22,6 @@ def index():
     
     elif request.method == 'GET':
         search = request.args.get('search_gift')
-
         if search:
             to_get = search in gift_list
 
