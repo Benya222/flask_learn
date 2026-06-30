@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages() %}
+    {% for msg in messages %}
+    <p>{{ msg }}</p>
+    {% endfor %}
+    {% endwith %}
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Phone number</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for key, value in bid_list.items() %}
+        <tr>
+          <td>{{ key }}</td>
+          <td>{{ value }}</td>
+          <td>
+            <form method="post">
+              <button type="submit" name="status" value="{{ key }}">
+                Оброблено
+              </button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -6,6 +6,11 @@
     <title>Document</title>
   </head>
   <body>
+    {% with messages = get_flashed_messages() %}
+    {% for msg in messages %}
+    <p>{{ msg }}</p>
+    {% endfor %}
+    {% endwith %}
     <form method="post">
       <label>
         Name

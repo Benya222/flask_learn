@@ -6,7 +6,12 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>CharmPie</h1>
+    {% with messages = get_flashed_messages() %}
+    {% for msg in messages %}
+    <p>{{ msg }}</p>
+    {% endfor %}
+    {% endwith %}
+    <h1>Python Course</h1>
     <img
       src="{{ url_for('static', filename='image/icons8-питон-48.png')}}"
       alt=""
