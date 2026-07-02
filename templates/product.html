@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% with massages = get_flashed_messages() %}
+    {% for msg in massages %}
+    <p>{{ msg }}</p>
+    {% endfor %}
+    {% endwith %}
+    <h1>Менеджер товарів</h1>
+    <h2>Додати товар</h2>
+    <form method="post">
+      <label>
+        Назва товару
+        <input type="text" name="name" />
+      </label>
+      <label>
+        Ціна товару
+        <input type="number" name="price" />
+      </label>
+      <label>
+        Категория
+        <input type="text" name="category" />
+      </label>
+      <button type="submit">Відправити</button>
+    </form>
+    <h2>Товари:</h2>
+    <table border="1" cellpadding="5">
+      <thead>
+        <tr>
+          <th>Назва</th>
+          <th>Ціна</th>
+          <th>Категория</th>
+          <th>Дія</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for name, info in all_products.items() %}
+        <tr>
+          <td>{{ name }}</td>
+          <td>{{ info['price'] }}</td>
+          <td>{{ info['category'] }}</td>
+          <td>
+            <a href="{{ url_for('delete', name_product= title) }}">
+              <button type="submit">Видалити</button>
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
