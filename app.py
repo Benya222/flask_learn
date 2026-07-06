@@ -27,10 +27,39 @@ def products():
     return render_template('product.html', all_products= all_products)
 
 
+@app.route('/edit/<name>', methods= ['GET', 'POST'])
+def edit(name):
+    current_price = str(all_products[name]['price'])
+    current_category = all_products[name]['category']
+
+    if request.method == 'POST':
+        price = request.form.get('new-price')
+        category = request.form.get('new-category')
+        if price:
+            all_products[name]['price'] = float(price)
+
+        if category:    
+            all_products[name]['category'] = category
+        
+        flash('Product edited!')
+        return redirect(url_for('products'))
+
+
+    return render_template('edit.html', 
+                           current_price= current_price, 
+                           current_category= current_category,
+                           title= name
+                           )
+
+
+
+
 @app.route('/delete/<name_product>')
 def delete(name_product):
     all_products.pop(name_product)
-    return redirect('products')
+    flash(f'Product {name_product} was deleted!')
+
+    return redirect(url_for('products'))
 
 
 app.run(debug= True)

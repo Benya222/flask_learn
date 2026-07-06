@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <title>Edit</title>
+  </head>
+  <body>
+    <h1>{{ title }}</h1>
+    <form method="post">
+      <label>
+        Price
+        <input
+          type="number"
+          name="new-price"
+          placeholder="{{ current_price }}"
+        />
+      </label>
+      <label>
+        Category
+        <input
+          type="text"
+          name="new-category"
+          placeholder="{{ current_category }}"
+        />
+      </label>
+      <button type="submit">Save</button>
+    </form>
+  </body>
+</html>

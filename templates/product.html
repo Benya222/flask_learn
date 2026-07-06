@@ -1,9 +1,23 @@
 <!doctype html>
-<html lang="uk">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <style>
+      .btn{
+        text-decoration: none;
+        padding: 3px;
+        background-color: aqua;
+        color:black;
+        border: 1px solid black;
+        border-radius: 4px;
+      }
+      .btn--delete{
+        background-color: rgb(255, 67, 67);
+        color: rgb(63, 58, 58)
+      }
+    </style>
+    <title>Product Meneger</title>
   </head>
   <body>
     {% with massages = get_flashed_messages() %}
@@ -11,31 +25,31 @@
     <p>{{ msg }}</p>
     {% endfor %}
     {% endwith %}
-    <h1>Менеджер товарів</h1>
-    <h2>Додати товар</h2>
+    <h1>Product meneger</h1>
+    <h2>Add product:</h2>
     <form method="post">
       <label>
-        Назва товару
+        Name
         <input type="text" name="name" />
       </label>
       <label>
-        Ціна товару
+        Price
         <input type="number" name="price" />
       </label>
       <label>
-        Категория
+        Category
         <input type="text" name="category" />
       </label>
       <button type="submit">Відправити</button>
     </form>
-    <h2>Товари:</h2>
+    <h2>Product:</h2>
     <table border="1" cellpadding="5">
       <thead>
         <tr>
-          <th>Назва</th>
-          <th>Ціна</th>
-          <th>Категория</th>
-          <th>Дія</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -45,9 +59,8 @@
           <td>{{ info['price'] }}</td>
           <td>{{ info['category'] }}</td>
           <td>
-            <a href="{{ url_for('delete', name_product= title) }}">
-              <button type="submit">Видалити</button>
-            </a>
+            <a href="{{ url_for('delete', name_product= name) }}" class="btn btn--delete">Delete</a>
+            <a href="{{ url_for('edit', name= name) }}" class="btn">Edit</a>
           </td>
         </tr>
         {% endfor %}
