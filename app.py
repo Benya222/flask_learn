@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
-
+from models import init_db
 
 app = Flask(__name__)
 app.secret_key = 'lslsdo***'
+
+
+init_db()
 
 all_products = {}
 
@@ -24,7 +27,20 @@ def products():
                                   }
         return redirect(url_for('products'))
 
-    return render_template('product.html', all_products= all_products)
+    all_categories = sorted({info['category'] for name, info in all_products.items()})
+    choose_category = request.args.get('category', 'all')
+    if choose_category == 'all':
+        filter_product = all_products
+    else:
+        filter_product = {name: info for name, info in all_products.items() if info['category'] == choose_category}
+ 
+
+
+    return render_template('product.html',
+                           all_products= filter_product, 
+                           categories= all_categories,
+                           choose_category= choose_category
+                           )
 
 
 @app.route('/edit/<name>', methods= ['GET', 'POST'])
