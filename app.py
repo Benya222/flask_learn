@@ -1,5 +1,9 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from models import init_db
+from actions_db import *
+
+
+
 
 app = Flask(__name__)
 app.secret_key = 'lslsdo***'
@@ -19,25 +23,25 @@ def products():
 
         price = float(price)
         
-        if name in all_products:
+        if product_exists(name):
             flash('Такий товар вже є!')
         else:
-            all_products[name] = {'price': price,
-                                  'category': category
-                                  }
+            add_product(name, price, category)
+
         return redirect(url_for('products'))
 
-    all_categories = sorted({info['category'] for name, info in all_products.items()})
+    all_categories = get_categories()
     choose_category = request.args.get('category', 'all')
+
     if choose_category == 'all':
-        filter_product = all_products
+        filter_product = get_products()
     else:
-        filter_product = {name: info for name, info in all_products.items() if info['category'] == choose_category}
+        filter_product = get_products_by_category(choose_category)
  
 
 
     return render_template('product.html',
-                           all_products= filter_product, 
+                           products= filter_product, 
                            categories= all_categories,
                            choose_category= choose_category
                            )
@@ -45,17 +49,14 @@ def products():
 
 @app.route('/edit/<name>', methods= ['GET', 'POST'])
 def edit(name):
-    current_price = str(all_products[name]['price'])
-    current_category = all_products[name]['category']
+    current_price = str(product_current_price(name))
+    current_category = product_current_category(name)
 
     if request.method == 'POST':
         price = request.form.get('new-price')
         category = request.form.get('new-category')
-        if price:
-            all_products[name]['price'] = float(price)
 
-        if category:    
-            all_products[name]['category'] = category
+        edit_product(name, price, category)
         
         flash('Product edited!')
         return redirect(url_for('products'))
@@ -72,7 +73,7 @@ def edit(name):
 
 @app.route('/delete/<name_product>')
 def delete(name_product):
-    all_products.pop(name_product)
+    delete_product(name_product)
     flash(f'Product {name_product} was deleted!')
 
     return redirect(url_for('products'))
