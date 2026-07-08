@@ -11,7 +11,7 @@ app.secret_key = 'lslsdo***'
 
 init_db()
 
-all_products = {}
+
 
 @app.route('/', methods= ['GET', 'POST'])
 @app.route('/products', methods= ['GET', 'POST'])

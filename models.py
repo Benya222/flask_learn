@@ -17,3 +17,4 @@ class Product(BaseModel):
 def init_db():
     db.connect()
     db.create_tables([Product])
+    
