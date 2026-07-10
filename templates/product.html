@@ -3,82 +3,92 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      .btn{
-        text-decoration: none;
-        padding: 3px;
-        background-color: aqua;
-        color:black;
-        border: 1px solid black;
-        border-radius: 4px;
-      }
-      .btn--delete{
-        background-color: rgb(255, 67, 67);
-        color: rgb(63, 58, 58)
-      }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <title>Product Meneger</title>
   </head>
   <body>
-    {% with massages = get_flashed_messages() %}
-    {% for msg in massages %}
-    <p>{{ msg }}</p>
-    {% endfor %}
-    {% endwith %}
-    <h1>Product meneger</h1>
-    <h2>Add product:</h2>
-    <form method="post">
-      <label>
-        Name
-        <input type="text" name="name" />
-      </label>
-      <label>
-        Price
-        <input type="number" name="price" />
-      </label>
-      <label>
-        Category
-        <input type="text" name="category" />
-      </label>
-      <button type="submit">Відправити</button>
-    </form>
-
-    <h2>Filter:</h2>
-    <form method="get">
-      <select name="category">
-        <option value="all" {% if choose_category == "all" %} selected {% endif %}>All</option>
-        {% for category in categories %}
-        <option value="{{ category }}" {% if choose_category == category %} selected {% endif %}>{{ category }}</option>
+    <header class="header">
+      <div class="container">
+        <div class="logo">
+          <a href="{{ url_for('products') }}">
+            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="logo">
+            <span>Product meneger</span>
+          </a>      
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        {% with massages = get_flashed_messages(with_categories=True) %}
+        {% for category, msg in massages %}
+        <p class="flash {{ category }}">{{ msg }}</p>
         {% endfor %}
-      </select>
-      <button type="submit">Submit</button>
-    </form>
+        {% endwith %}
 
+        <h1>Product meneger</h1>
+        <h2>Add product:</h2>
+        <form method="post">
+          <label>
+            Name
+            <input type="text" name="name" />
+          </label>
+          <label>
+            Price
+            <input type="number" name="price" />
+          </label>
+          <label>
+            Category
+            <input type="text" name="category" />
+          </label>
+          <button type="submit" class="button">Відправити</button>
+        </form>
 
+        <h2>Filter:</h2>
+        <form method="get">
+          <select name="category">
+            <option value="all"{% if choose_category=="all" %} selected {% endif %}>
+              All
+            </option>
+            {% for category in categories %}
+            <option value="{{ category }}" {% if choose_category=="category" %} selected {% endif %}>
+              {{ category }}
+            </option>
+            {% endfor %}
+          </select>
+          <button type="submit" class="button">Submit</button>
+        </form>
 
-    <h2>Product:</h2>
-    <table border="1" cellpadding="5">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Category</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for product in products %}
-        <tr>
-          <td>{{ product.name }}</td>
-          <td>{{ product.price }}</td>
-          <td>{{ product.category }}</td>
-          <td>
-            <a href="{{ url_for('delete', name_product= product.name) }}" class="btn btn--delete">Delete</a>
-            <a href="{{ url_for('edit', name= product.name) }}" class="btn">Edit</a>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+        <h2>Product:</h2>
+        <table border="1" cellpadding="5">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for product in products %}
+            <tr>
+              <td>{{ product.name }}</td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.category }}</td>
+              <td>
+                <a
+                  href="{{ url_for('delete', name_product= product.name) }}"
+                  class="button"
+                  >Delete</a
+                >
+                <a href="{{ url_for('edit', name= product.name) }}" class="btn"
+                  >Edit</a
+                >
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </main>
   </body>
 </html>

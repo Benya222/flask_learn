@@ -24,7 +24,7 @@ def products():
         price = float(price)
         
         if product_exists(name):
-            flash('Такий товар вже є!')
+            flash('Такий товар вже є!', category="error")
         else:
             add_product(name, price, category)
 
@@ -58,7 +58,7 @@ def edit(name):
 
         edit_product(name, price, category)
         
-        flash('Product edited!')
+        flash('Product edited!', category="success")
         return redirect(url_for('products'))
 
 
@@ -74,7 +74,7 @@ def edit(name):
 @app.route('/delete/<name_product>')
 def delete(name_product):
     delete_product(name_product)
-    flash(f'Product {name_product} was deleted!')
+    flash(f'Product {name_product} was deleted!', category="success")
 
     return redirect(url_for('products'))
 
