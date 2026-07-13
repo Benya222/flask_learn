@@ -5,6 +5,9 @@
   --danger-color: #e74c3c;
   --danger-hover: #c0392b;
 
+  --edit-color: #16a085;
+  --edit-hover: #13856e;
+
   --bg-color: #f6f7f8;
   --card-bg: #ffffff;
 
@@ -14,36 +17,8 @@
   --success-bg: #e6f7e6;
 }
 
-
-/* ===== HEADER ===== */
-.header {
-  padding: 10px 0;
-}
-
-.header .container {
-  background-color: var(--primary-color);
-  border-radius: 10px;
-  padding: 10px 20px;
-}
-
-.logo a {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-
-  text-decoration: none;
-  color: white;
-}
-
-.logo img {
-  width: 30px;
-  height: 30px;
-  filter: invert(100%);
-}
-
-.logo span {
-  font-size: 20px;
-  font-weight: bold;
+* {
+  box-sizing: border-box;
 }
 
 /* ===== БАЗА ===== */
@@ -61,21 +36,50 @@ body {
   margin: 0 auto;
 }
 
+.container-edit {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ===== HEADER ===== */
+.header {
+  padding: 10px 0;
+}
+
+.header .container {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.logo a{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
+
+.logo img {
+  width: 30px;
+  height: 30px;
+  filter: invert(100%);
+}
+
+
+
 /* ===== ЗАГОЛОВОК ===== */
-h1 {
+.title {
   text-align: center;
   margin-bottom: 20px;
 }
 
-/* ===== FLASH ===== */
-p {
-  background-color: var(--success-bg);
-  padding: 10px;
-  border-radius: 5px;
-}
 
 /* ===== ФОРМИ ===== */
-form {
+.form {
   background-color: var(--card-bg);
   padding: 15px;
   margin-bottom: 20px;
@@ -83,8 +87,7 @@ form {
 }
 
 /* ===== INPUT ===== */
-input,
-select {
+.input {
   padding: 8px;
   margin: 5px 5px 5px 0;
   border: 1px solid #ccc;
@@ -101,7 +104,7 @@ select {
   cursor: pointer;
 }
 
-button:hover {
+.button:hover {
   background-color: var(--primary-hover);
 }
 
@@ -133,13 +136,25 @@ tbody tr:hover {
 }
 
 /* DELETE КНОПКА */
-table .button {
+.danger-btn {
   text-decoration: none;
   background-color: var(--danger-color);
 }
 
-table .button:hover {
+.danger-btn:hover,
+.danger-btn:focus {
   background-color: var(--danger-hover);
+}
+
+/* EDIT КНОПКА */
+.edit-btn {
+  text-decoration: none;
+  background-color: var(--edit-color);
+}
+
+.edit-btn:hover,
+.edit-btn:focus {
+  background-color: var(--edit-hover);
 }
 
 /* ===== FLASH ===== */
@@ -147,12 +162,14 @@ table .button:hover {
   padding: 10px;
   border-radius: 5px;
   margin-bottom: 10px;
+
+  background-color: var(--success-bg);
   transition: opacity 0.5s;
 }
 
 /* успіх */
 .flash.success {
-  background-color: #e6f7e6;
+  background-color: var(--success-bg);
   color: #2e7d32;
 }
 
@@ -161,3 +178,42 @@ table .button:hover {
   background-color: #fdecea;
   color: #c0392b;
 }
+/* ===================================================== */
+.edit-body {
+  display: flex;
+  min-height: 100vh;
+  margin: 0;
+  justify-content: center;
+  align-items: center;
+
+  background-color: #f3faf8;
+;
+}
+
+.container-edit {
+  padding: 10px;
+  background-color: var(--edit-hover);
+  border-radius: 10px;
+}
+
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+
+  background-color: var(--card-bg);
+}
+
+
+
+.edit-label {
+  display: block;
+}
+
+.edit-form .grouping {
+  margin-bottom: 10px;
+}
+

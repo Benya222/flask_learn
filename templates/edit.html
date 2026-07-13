@@ -4,29 +4,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=\, initial-scale=1.0" />
     <title>Edit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
-  <body>
-    <h1>{{ title }}</h1>
-    <form method="post">
-      <label>
-        Price
-        <input
-          type="number"
-          name="new-price"
-          placeholder="{{ current_price }}"
-          value="{{ current_price }}"
-        />
-      </label>
-      <label>
-        Category
-        <input
-          type="text"
-          name="new-category"
-          placeholder="{{ current_category }}"
-          value="{{ current_category }}"
-        />
-      </label>
-      <button type="submit">Save</button>
-    </form>
+  <body class="edit-body">
+    <div class="container-edit">
+      <h1 class="title edit-title">{{ title }}</h1>
+      <form method="post" class="edit-form">
+        <div class="grouping">
+          <label for="new-price" class="edit-label">
+            Price
+          </label>  
+            <input
+              type="number"
+              name="new-price"
+              placeholder="{{ current_price }}"
+              value="{{ current_price }}"
+              id="new-price"
+              class="input"
+            />
+        </div>
+        <div class="grouping">
+          <label for="new-category" class="edit-label">
+            Category
+          </label>  
+            <input
+              type="text"
+              name="new-category"
+              placeholder="{{ current_category }}"
+              value="{{ current_category }}"
+              id="new-category"
+              class="input"
+            />          
+        </div>        
+        <button type="submit" class="button">Save</button>
+      </form>
+    </div>
   </body>
 </html>

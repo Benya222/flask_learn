@@ -10,9 +10,9 @@
     <header class="header">
       <div class="container">
         <div class="logo">
-          <a href="{{ url_for('products') }}">
+          <a href="{{ url_for('products') }}" >
             <img src="{{ url_for('static', filename='image/logo.png') }}" alt="logo">
-            <span>Product meneger</span>
+            Product meneger
           </a>      
         </div>
       </div>
@@ -25,27 +25,27 @@
         {% endfor %}
         {% endwith %}
 
-        <h1>Product meneger</h1>
+        <h1 class="title">Product meneger</h1>
         <h2>Add product:</h2>
-        <form method="post">
+        <form method="post" class="form">
           <label>
             Name
-            <input type="text" name="name" />
+            <input type="text" name="name" class="input"/>
           </label>
           <label>
             Price
-            <input type="number" name="price" />
+            <input type="number" name="price" class="input"/>
           </label>
           <label>
             Category
-            <input type="text" name="category" />
+            <input type="text" name="category" class="input"/>
           </label>
           <button type="submit" class="button">Відправити</button>
         </form>
 
         <h2>Filter:</h2>
-        <form method="get">
-          <select name="category">
+        <form method="get" class="form">
+          <select name="category" class="input">
             <option value="all"{% if choose_category=="all" %} selected {% endif %}>
               All
             </option>
@@ -77,10 +77,10 @@
               <td>
                 <a
                   href="{{ url_for('delete', name_product= product.name) }}"
-                  class="button"
+                  class="button danger-btn"
                   >Delete</a
                 >
-                <a href="{{ url_for('edit', name= product.name) }}" class="btn"
+                <a href="{{ url_for('edit', name= product.name) }}" class="button edit-btn"
                   >Edit</a
                 >
               </td>
