@@ -90,5 +90,16 @@
         </table>
       </div>
     </main>
+    <script>
+      setTimeout(() => {
+        const flashes = document.querySelectorAll('.flash');
+
+        flashes.forEach(el => {
+          el.style.opacity = '0';
+          setTimeout(() => el.remove(), 500);
+        });
+
+      }, 3000);
+    </script>
   </body>
 </html>
