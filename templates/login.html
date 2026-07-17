@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    {% with massages = get_flashed_massages() %}
+    {% for msg in massages %}
+    <p>{{ msg }}</p>
+    {% endfor %}
+    {% endwith %}
+    <form method="post">
+      <label for="name-company">Name company:</label>
+      <input type="text" name="name_company" id="name-company" />
+
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" />
+
+      <button type="submit">Login</button>
+    </form>
+  </body>
+</html>

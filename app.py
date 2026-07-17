@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from models import init_db
 from actions_db import *
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 
 
@@ -10,6 +10,8 @@ app.secret_key = 'lslsdo***'
 
 
 init_db()
+
+
 
 
 
@@ -77,6 +79,45 @@ def delete(name_product):
     flash(f'Product {name_product} was deleted!', category="success")
 
     return redirect(url_for('products'))
+
+
+
+@app.route('/register', methods= ['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        name = request.form.get('name_company')
+        password = request.form.get('password')
+        
+        if company_exists(name):
+            flash(f'Company {name} already exists!')
+            return redirect(url_for('register'))
+        else:
+            hash_pass = generate_password_hash(password)
+            add_company(name, hash_pass)
+            flash(f'Company {name} was created!')
+            return redirect(url_for('login'))
+
+    return render_template('register.html')
+
+@app.route('/login')
+def login():
+    if request.method == 'POST':
+        name = request.form.get('name_company')
+        password = request.form.get('password')
+
+        if not company_exists(name):
+            flash()
+            redirect(url_for('login'))
+
+        company = get_company_by_name(name)
+        if not check_password_hash(company.password, password):
+            flash('Password incorrect!')
+            return redirect(url_for('login'))
+
+        flash(f'Welcome {name}!')
+        return redirect(url_for('products'))    
+
+    return render_template('login.html')
 
 
 app.run(debug= True)

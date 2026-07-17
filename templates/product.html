@@ -3,17 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename= 'css/style.css') }}"
+    />
     <title>Product Meneger</title>
   </head>
   <body>
     <header class="header">
       <div class="container">
         <div class="logo">
-          <a href="{{ url_for('products') }}" >
-            <img src="{{ url_for('static', filename='image/logo.png') }}" alt="logo">
+          <a href="{{ url_for('products') }}">
+            <img
+              src="{{ url_for('static', filename='image/logo.png') }}"
+              alt="logo"
+            />
             Product meneger
-          </a>      
+          </a>
+        </div>
+        <div>
+          <a href="{{ url_for('login') }}">Login</a>
+          <a href="{{ url_for('register') }}">Register</a>
         </div>
       </div>
     </header>
@@ -30,15 +40,15 @@
         <form method="post" class="form">
           <label>
             Name
-            <input type="text" name="name" class="input"/>
+            <input type="text" name="name" class="input" />
           </label>
           <label>
             Price
-            <input type="number" name="price" class="input"/>
+            <input type="number" name="price" class="input" />
           </label>
           <label>
             Category
-            <input type="text" name="category" class="input"/>
+            <input type="text" name="category" class="input" />
           </label>
           <button type="submit" class="button">Send</button>
         </form>
@@ -46,11 +56,11 @@
         <h2>Filter:</h2>
         <form method="get" class="form">
           <select name="category" class="input">
-            <option value="all"{% if choose_category=="all" %} selected {% endif %}>
+            <option value="all" {% if choose_category=="all" %} selected {% endif %}>
               All
             </option>
             {% for category in categories %}
-            <option value="{{ category }}" {% if choose_category=="category" %} selected {% endif %}>
+            <option value="{{ category }}" {% if choose_category=="category" %} selected {% endif %} >
               {{ category }}
             </option>
             {% endfor %}
@@ -80,7 +90,9 @@
                   class="button danger-btn"
                   >Delete</a
                 >
-                <a href="{{ url_for('edit', name= product.name) }}" class="button edit-btn"
+                <a
+                  href="{{ url_for('edit', name= product.name) }}"
+                  class="button edit-btn"
                   >Edit</a
                 >
               </td>
@@ -92,13 +104,12 @@
     </main>
     <script>
       setTimeout(() => {
-        const flashes = document.querySelectorAll('.flash');
+        const flashes = document.querySelectorAll(".flash");
 
-        flashes.forEach(el => {
-          el.style.opacity = '0';
+        flashes.forEach((el) => {
+          el.style.opacity = "0";
           setTimeout(() => el.remove(), 500);
         });
-
       }, 3000);
     </script>
   </body>
