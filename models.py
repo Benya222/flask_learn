@@ -8,19 +8,22 @@ class BaseModel(Model):
         database = db
 
 
-class Product(BaseModel):
-    name = CharField(unique=True)
-    price = FloatField()
-    category = CharField()
-
 
 class Company(BaseModel):
     name = CharField(unique=True)
     password = CharField()
 
+class Product(BaseModel):
+    name = CharField(unique=True)
+    price = FloatField()
+    category = CharField()
+    company = ForeignKeyField(Company, backref="products")
+
+
+
 
 
 def init_db():
     db.connect()
-    db.create_tables([Product, Company])
+    db.create_tables([Company, Product])
     
