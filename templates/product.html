@@ -11,7 +11,7 @@
   </head>
   <body>
     <header class="header">
-      <div class="container">
+      <div class="container container--flex">
         <div class="logo">
           <a href="{{ url_for('products') }}">
             <img
@@ -21,9 +21,9 @@
             Product meneger
           </a>
         </div>
-        <div>
-          <a href="{{ url_for('login') }}">Login</a>
-          <a href="{{ url_for('register') }}">Register</a>
+        <div class="authorization">
+          <a href="{{ url_for('login') }}" class="button button-reverse">Login</a>
+          <a href="{{ url_for('register') }}" class="button button-with-border">Register</a>
         </div>
       </div>
     </header>
@@ -60,7 +60,7 @@
               All
             </option>
             {% for category in categories %}
-            <option value="{{ category }}" {% if choose_category=="category" %} selected {% endif %} >
+            <option value="{{ category }}" {% if choose_category=="category" %} selected {% endif %}>
               {{ category }}
             </option>
             {% endfor %}

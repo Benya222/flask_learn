@@ -3,23 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename= 'css/style.css') }}"
+    />
     <title>Login</title>
   </head>
   <body>
-    <h1>Login</h1>
-    {% with massages = get_flashed_massages() %}
-    {% for msg in massages %}
-    <p>{{ msg }}</p>
-    {% endfor %}
-    {% endwith %}
-    <form method="post">
-      <label for="name-company">Name company:</label>
-      <input type="text" name="name_company" id="name-company" />
+    <header class="header">
+      <div class="container container--flex">
+        <div class="logo">
+          <a href="{{ url_for('products') }}">
+            <img
+              src="{{ url_for('static', filename='image/logo.png') }}"
+              alt="logo"
+            />
+            Product meneger
+          </a>
+        </div>
+        <div class="authorization">
+          <a href="{{ url_for('login') }}" class="button button-reverse">Login</a>
+          <a href="{{ url_for('register') }}" class="button button-with-border">Register</a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="centred-body">
+        <div class="container-card">
+          <h1 class="title card-title">Login</h1>
+          {% with messages = get_flashed_messages() %}
+          {% for msg in messages %}
+          <p>{{ msg }}</p>
+          {% endfor %}
+          {% endwith %}
+          <form method="post" class="card-form">
+            <div class="grouping">
+              <label for="name-company" class="card-label">Name company:</label>
+              <input type="text" name="name_company" id="name-company" class="input"/>              
+            </div>
 
-      <label for="password">Password:</label>
-      <input type="password" name="password" id="password" />
+            <div class="grouping">
+              <label for="password" class="card-label">Password:</label>
+              <input type="password" name="password" id="password" class="input"/>              
+            </div>
 
-      <button type="submit">Login</button>
-    </form>
+            <button type="submit" class="button">Login</button>
+          </form>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

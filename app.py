@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, session
 from models import init_db
 from actions_db import *
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -12,12 +12,18 @@ app.secret_key = 'lslsdo***'
 init_db()
 
 
-
+def is_logged():
+    return 'company' in session
 
 
 @app.route('/', methods= ['GET', 'POST'])
 @app.route('/products', methods= ['GET', 'POST'])
 def products():
+    session.permanent = True
+    if not is_logged():
+        return redirect(url_for('login'))
+
+
     if request.method == 'POST':
         name = request.form.get('name')
         price = request.form.get('price')
@@ -99,23 +105,25 @@ def register():
 
     return render_template('register.html')
 
-@app.route('/login')
+@app.route('/login', methods= ['GET', 'POST'])
 def login():
     if request.method == 'POST':
         name = request.form.get('name_company')
         password = request.form.get('password')
 
         if not company_exists(name):
-            flash()
-            redirect(url_for('login'))
+            flash(f'Company {name} not exists!')
+            return redirect(url_for('login'))
 
         company = get_company_by_name(name)
         if not check_password_hash(company.password, password):
             flash('Password incorrect!')
             return redirect(url_for('login'))
 
+        session['company'] = company.name
         flash(f'Welcome {name}!')
-        return redirect(url_for('products'))    
+        return redirect(url_for('products'))  
+      
 
     return render_template('login.html')
 

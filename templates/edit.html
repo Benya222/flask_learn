@@ -6,40 +6,59 @@
     <title>Edit</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   </head>
-  <body class="edit-body">
-    <main>
-      <div class="container-edit">
-        <h1 class="title edit-title">{{ title }}</h1>
-        <form method="post" class="edit-form">
-          <div class="grouping">
-            <label for="new-price" class="edit-label">
-              Price
-            </label>  
-            <input
-              type="number"
-              name="new-price"
-              placeholder="{{ current_price }}"
-              value="{{ current_price }}"
-              id="new-price"
-              class="input"
+  <body >
+    <header class="header">
+      <div class="container container--flex">
+        <div class="logo">
+          <a href="{{ url_for('products') }}">
+            <img
+              src="{{ url_for('static', filename='image/logo.png') }}"
+              alt="logo"
             />
-          </div>
-          <div class="grouping">
-            <label for="new-category" class="edit-label">
-              Category
-            </label>  
-            <input
-              type="text"
-              name="new-category"
-              placeholder="{{ current_category }}"
-              value="{{ current_category }}"
-              id="new-category"
-              class="input"
-            />          
-          </div>        
-          <button type="submit" class="button">Save</button>
-        </form>
-      </div>      
+            Product meneger
+          </a>
+        </div>
+        <div class="authorization">
+          <a href="{{ url_for('login') }}" class="button button-reverse">Login</a>
+          <a href="{{ url_for('register') }}" class="button button-with-border">Register</a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="centred-body">
+        <div class="container-card">
+          <h1 class="title card-title">{{ title }}</h1>
+          <form method="post" class="card-form">
+            <div class="grouping">
+              <label for="new-price" class="card-label">
+                Price
+              </label>  
+              <input
+                type="number"
+                name="new-price"
+                placeholder="{{ current_price }}"
+                value="{{ current_price }}"
+                id="new-price"
+                class="input"
+              />
+            </div>
+            <div class="grouping">
+              <label for="new-category" class="card-label">
+                Category
+              </label>  
+              <input
+                type="text"
+                name="new-category"
+                placeholder="{{ current_category }}"
+                value="{{ current_category }}"
+                id="new-category"
+                class="input"
+              />          
+            </div>        
+            <button type="submit" class="button">Save</button>
+          </form>
+        </div>
+      </div>
     </main>
   </body>
 </html>

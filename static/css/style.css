@@ -41,6 +41,11 @@ body {
   margin: 0 auto;
 }
 
+.container--flex {
+  display: flex;
+  align-items: center;
+}
+
 /* ===== HEADER ===== */
 .header {
   padding: 10px 0;
@@ -52,7 +57,7 @@ body {
   padding: 10px 20px;
 }
 
-.logo a{
+.logo a {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -69,14 +74,15 @@ body {
   filter: invert(100%);
 }
 
-
+.authorization {
+  margin-left: auto;
+}
 
 /* ===== ЗАГОЛОВОК ===== */
 .title {
   text-align: center;
   margin-bottom: 20px;
 }
-
 
 /* ===== ФОРМИ ===== */
 .form {
@@ -99,8 +105,6 @@ body {
   border: 1px solid var(--primary-color);
 }
 
-
-
 /* ===== КНОПКИ ===== */
 .button {
   padding: 8px 15px;
@@ -109,6 +113,15 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.button-reverse {
+  background-color: #fff;
+  color: var(--primary-color)
+}
+.button-with-border {
+  border: 1px solid #fff;
 }
 
 .button:hover {
@@ -186,28 +199,27 @@ tbody tr:hover {
   color: #c0392b;
 }
 /* ===================================================== */
-.edit-body {
+.centred-body {
   display: flex;
-  min-height: 100vh;
-  margin: 0;
+  /* min-height: 100vh; */
+  margin-top: 50px;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
 
   background-color: #f3faf8;
-
 }
 
-.container-edit {
+.container-card {
   padding: 10px;
-  background-color: var(--success-bg);
+  background-color: var(--primary-color);
   border-radius: 10px;
 }
 
-.edit-title {
-  color: #2e7d32;
+.card-title {
+  color: #fff;
 }
 
-.edit-form {
+.card-form {
   display: flex;
   flex-direction: column;
   padding: 15px;
@@ -217,13 +229,10 @@ tbody tr:hover {
   background-color: var(--card-bg);
 }
 
-
-
-.edit-label {
+.card-label {
   display: block;
 }
 
-.edit-form .grouping {
+.card-form .grouping {
   margin-bottom: 10px;
 }
-
