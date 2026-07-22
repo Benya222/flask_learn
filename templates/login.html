@@ -8,11 +8,12 @@ Login
   <div class="centred-body">
     <div class="container-card">
       <h1 class="title card-title">Login</h1>
-      {% with messages = get_flashed_messages() %}
-      {% for msg in messages %}
-      <p>{{ msg }}</p>
+      {% with massages = get_flashed_messages(with_categories=True) %}
+      {% for category, msg in massages %}
+      <p class="flash {{ category }}">{{ msg }}</p>
       {% endfor %}
       {% endwith %}
+
       <form method="post" class="card-form">
         <div class="grouping">
           <label for="name-company" class="card-label">Name company:</label>

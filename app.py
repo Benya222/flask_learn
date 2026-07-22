@@ -115,16 +115,16 @@ def register():
         password = request.form.get('password')
 
         if not valid_register(name, password):
-            flash('Weak password or no name!')
+            flash('Weak password or no name!', category= 'error')
             return redirect(url_for('register'))
         
         if company_exists(name):
-            flash(f'Company {name} already exists!')
+            flash(f'Company {name} already exists!', category= 'error')
             return redirect(url_for('register'))
         else:
             hash_pass = generate_password_hash(password)
             add_company(name, hash_pass)
-            flash(f'Company {name} was created!')
+            flash(f'Company {name} was created!', category= 'success')
             return redirect(url_for('login'))
 
     return render_template('register.html')
@@ -136,16 +136,16 @@ def login():
         password = request.form.get('password')
 
         if not company_exists(name):
-            flash(f'Company {name} not exists!')
+            flash(f'Company {name} not exists!', category= 'error')
             return redirect(url_for('login'))
 
         company = get_company_by_name(name)
         if not check_password_hash(company.password, password):
-            flash('Password incorrect!')
+            flash('Password incorrect!', category= 'error')
             return redirect(url_for('login'))
 
         session['company'] = company.name
-        flash(f'Welcome {name}!')
+        flash(f'Welcome {name}!', category= 'success')
         return redirect(url_for('products'))  
       
 
@@ -155,6 +155,7 @@ def login():
 @app.route('/loguot')
 def logout():
     session.pop('company')
+    flash('You are logged out!', category= 'success')
     return redirect(url_for('login'))
 
 
