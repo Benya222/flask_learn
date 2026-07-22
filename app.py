@@ -18,15 +18,26 @@ def is_logged():
 def current_company():
     return get_company_by_name(session['company'])
 
+def valid_register(login, password) -> bool:
+    special = ['!', '@', '#', '$', '%', '^', '&', '*', '?', '/', ',', '.', ':', ';', '~']
+    if_letter = any(letter.isalpha() for letter in password)
+    if_special = any(letter in special for letter in password)
+    strong_pass = len(password) >= 6 and if_letter and if_special
+    return login and strong_pass
+
 
 @app.route('/', methods= ['GET', 'POST'])
 @app.route('/products', methods= ['GET', 'POST'])
 def products():
     session.permanent = True
+    
     if not is_logged():
         return redirect(url_for('login'))
-
+    
     company = current_company()
+    
+
+    
     if request.method == 'POST':
         name = request.form.get('name')
         price = request.form.get('price')
@@ -34,7 +45,7 @@ def products():
 
         price = float(price)
         
-        if product_exists(name):
+        if product_exists(name, company.id):
             flash('Такий товар вже є!', category="error")
         else:
             add_product(name, price, category, company.id)
@@ -54,7 +65,8 @@ def products():
     return render_template('product.html',
                            products= filter_product, 
                            categories= all_categories,
-                           choose_category= choose_category
+                           choose_category= choose_category,
+                           company=current_company
                            )
 
 
@@ -79,7 +91,8 @@ def edit(name):
     return render_template('edit.html', 
                            current_price= current_price, 
                            current_category= current_category,
-                           title= name
+                           title= name,
+                           company= company
                            )
 
 
@@ -100,6 +113,10 @@ def register():
     if request.method == 'POST':
         name = request.form.get('name_company')
         password = request.form.get('password')
+
+        if not valid_register(name, password):
+            flash('Weak password or no name!')
+            return redirect(url_for('register'))
         
         if company_exists(name):
             flash(f'Company {name} already exists!')
@@ -133,6 +150,13 @@ def login():
       
 
     return render_template('login.html')
+
+
+@app.route('/loguot')
+def logout():
+    session.pop('company')
+    return redirect(url_for('login'))
+
 
 
 app.run(debug= True)

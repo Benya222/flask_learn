@@ -21,9 +21,14 @@
             Product meneger
           </a>
         </div>
+        
         <div class="authorization">
+          {% if not company %}
           <a href="{{ url_for('login') }}" class="button button-reverse">Login</a>
           <a href="{{ url_for('register') }}" class="button button-with-border">Register</a>
+          {% else %}
+          <a href="{{ url_for('logout') }}" class="button button-with-border">Log Out</a>
+          {% endif %}
         </div>
       </div>
     </header>
