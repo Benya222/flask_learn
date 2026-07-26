@@ -13,7 +13,7 @@
     <header class="header">
       <div class="container container--flex">
         <div class="logo">
-          <a href="{{ url_for('products') }}">
+          <a href="{{ url_for('product.products') }}">
             <img
               src="{{ url_for('static', filename='image/logo.png') }}"
               alt="logo"
@@ -24,10 +24,10 @@
         
         <div class="authorization">
           {% if not company %}
-          <a href="{{ url_for('login') }}" class="button button-reverse">Login</a>
-          <a href="{{ url_for('register') }}" class="button button-with-border">Register</a>
+          <a href="{{ url_for('auth.login') }}" class="button button-reverse">Login</a>
+          <a href="{{ url_for('auth.register') }}" class="button button-with-border">Register</a>
           {% else %}
-          <a href="{{ url_for('logout') }}" class="button button-with-border">Log Out</a>
+          <a href="{{ url_for('auth.logout') }}" class="button button-with-border">Log Out</a>
           {% endif %}
         </div>
       </div>
@@ -91,12 +91,12 @@
               <td>{{ product.category }}</td>
               <td>
                 <a
-                  href="{{ url_for('delete', name_product= product.name) }}"
+                  href="{{ url_for('product.delete', name_product= product.name) }}"
                   class="button danger-btn"
                   >Delete</a
                 >
                 <a
-                  href="{{ url_for('edit', name= product.name) }}"
+                  href="{{ url_for('product.edit', name= product.name) }}"
                   class="button edit-btn"
                   >Edit</a
                 >
